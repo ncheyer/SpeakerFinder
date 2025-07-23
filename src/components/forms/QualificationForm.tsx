@@ -124,15 +124,7 @@ export default function QualificationForm() {
 
   const handleSubmit = async () => {
     if (validateStep(currentStep)) {
-      // Check if looking for AI speakers
-      const isAISpeaker = formData.topicAreas.some(topic => 
-        topic.toLowerCase().includes('ai') || topic.toLowerCase().includes('machine learning')
-      );
-      
-      if (isAISpeaker) {
-        window.open('https://speakabout.ai', '_blank');
-        return;
-      }
+      // All speakers including AI are now handled in-app
 
       // Submit to database
       const requestData = {

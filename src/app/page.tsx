@@ -46,12 +46,12 @@ export default function Home() {
             <CardHeader>
               <CardTitle>AI Specialists</CardTitle>
               <CardDescription>
-                Specialized AI speakers available through speakabout.ai
+                AI and machine learning experts in our speaker network
               </CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-gray-600">
-                Looking for AI experts? We&apos;ll connect you with our specialized AI speaker network.
+                Discover leading AI researchers, ML practitioners, and technology futurists all in one place.
               </p>
             </CardContent>
           </Card>
