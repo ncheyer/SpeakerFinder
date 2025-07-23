@@ -37,6 +37,7 @@ export default function RootLayout({
                   <Link href="/" className="text-gray-600 hover:text-gray-900">Home</Link>
                   <Link href="/speakers" className="text-gray-600 hover:text-gray-900">Find Speakers</Link>
                   <Link href="/qualification" className="text-gray-600 hover:text-gray-900">Get Started</Link>
+                  <Link href="/apply" className="text-gray-600 hover:text-gray-900">Apply as Speaker</Link>
                 </div>
               </div>
             </div>

@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+import { DatabaseService } from "@/lib/database";
 
 interface FormData {
   organizationName: string;
@@ -121,7 +122,7 @@ export default function QualificationForm() {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validateStep(currentStep)) {
       // Check if looking for AI speakers
       const isAISpeaker = formData.topicAreas.some(topic => 
@@ -133,8 +134,43 @@ export default function QualificationForm() {
         return;
       }
 
-      console.log("Form submitted:", formData);
-      alert("Thank you! We'll be in touch with speaker recommendations shortly.");
+      // Submit to database
+      const requestData = {
+        organization_name: formData.organizationName,
+        contact_email: formData.contactEmail,
+        contact_phone: formData.contactPhone || null,
+        event_type: formData.eventType,
+        industry: formData.industry,
+        audience_size: formData.audienceSize,
+        budget: parseInt(formData.budget),
+        event_date: formData.eventDate,
+        location: formData.location,
+        topic_areas: formData.topicAreas,
+        additional_requirements: formData.additionalRequirements || null
+      };
+
+      const result = await DatabaseService.submitQualificationRequest(requestData);
+      
+      if (result) {
+        alert("Thank you! We'll be in touch with speaker recommendations shortly.");
+        // Reset form
+        setFormData({
+          organizationName: "",
+          contactEmail: "",
+          contactPhone: "",
+          eventType: "",
+          industry: "",
+          audienceSize: "",
+          budget: "",
+          eventDate: "",
+          location: "",
+          topicAreas: [],
+          additionalRequirements: ""
+        });
+        setCurrentStep(1);
+      } else {
+        alert("There was an error submitting your request. Please try again.");
+      }
     }
   };
 
