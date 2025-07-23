@@ -14,7 +14,7 @@ export default function Home() {
             Discover world-class speakers across all topics. Professional speakers with minimum fees starting at $10,000.
           </p>
           <div className="flex gap-4 justify-center">
-            <Link href="/qualification">
+            <Link href="/auth">
               <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
                 Get Started
               </Button>
@@ -73,14 +73,14 @@ export default function Home() {
 
         <div className="text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Ready to find your speaker?
+            Ready to start planning your event?
           </h2>
           <p className="text-lg text-gray-600 mb-8">
-            Complete our qualification form to get matched with the perfect speaker for your event.
+            Create an account to organize your projects and build speaker wishlists for your events.
           </p>
-          <Link href="/qualification">
+          <Link href="/auth">
             <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-              Start Qualification Process
+              Create Your Account
             </Button>
           </Link>
         </div>

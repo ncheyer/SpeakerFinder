@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { createClient } from "@/lib/auth";
 import type { AuthUser } from "@/lib/auth";
 
@@ -18,6 +19,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
   const supabase = createClient();
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     // Get initial session
@@ -36,17 +39,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        setUser(session?.user ? {
+        const newUser = session?.user ? {
           id: session.user.id,
           email: session.user.email,
           user_metadata: session.user.user_metadata
-        } : null);
+        } : null;
+        
+        setUser(newUser);
         setLoading(false);
+        
+        // Redirect to dashboard after successful login/signup
+        if (event === 'SIGNED_IN' && newUser && pathname === '/auth') {
+          router.push('/dashboard');
+        }
       }
     );
 
     return () => subscription.unsubscribe();
-  }, [supabase.auth]);
+  }, [supabase.auth, router, pathname]);
 
   const signIn = async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({

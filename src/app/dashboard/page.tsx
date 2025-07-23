@@ -68,9 +68,21 @@ export default function DashboardPage() {
             <h1 className="text-4xl font-bold text-gray-900 mb-2">
               Welcome back, {user?.user_metadata?.full_name || user?.email}!
             </h1>
-            <p className="text-lg text-gray-600">
-              Manage your speaker events and projects
+            <p className="text-lg text-gray-600 mb-4">
+              Your central hub for managing speaker events and building speaker wishlists
             </p>
+            <div className="flex gap-4">
+              <Link href="/projects/new">
+                <Button className="bg-blue-600 hover:bg-blue-700">
+                  Create New Project
+                </Button>
+              </Link>
+              <Link href="/speakers">
+                <Button variant="outline">
+                  Browse Speakers
+                </Button>
+              </Link>
+            </div>
           </div>
 
           {/* Stats Overview */}
@@ -133,7 +145,10 @@ export default function DashboardPage() {
           {/* Recent Projects */}
           <div className="mb-8">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">Recent Projects</h2>
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900">Your Projects</h2>
+                <p className="text-gray-600">Create projects for events, then build speaker wishlists for each one</p>
+              </div>
               <Link href="/projects/new">
                 <Button className="bg-blue-600 hover:bg-blue-700">
                   Create New Project
@@ -145,16 +160,34 @@ export default function DashboardPage() {
               <Card>
                 <CardContent className="text-center py-12">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                    No projects yet
+                    Ready to start planning your event?
                   </h3>
-                  <p className="text-gray-600 mb-4">
-                    Create your first project to start finding speakers for your events.
+                  <p className="text-gray-600 mb-6">
+                    Create your first project to organize your event and build a wishlist of speakers.
                   </p>
-                  <Link href="/projects/new">
-                    <Button className="bg-blue-600 hover:bg-blue-700">
-                      Create First Project
-                    </Button>
-                  </Link>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-center gap-4 text-sm text-gray-500 mb-4">
+                      <span className="flex items-center gap-1">
+                        <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-semibold">1</span>
+                        Create Project
+                      </span>
+                      <span>→</span>
+                      <span className="flex items-center gap-1">
+                        <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-semibold">2</span>
+                        Browse Speakers
+                      </span>
+                      <span>→</span>
+                      <span className="flex items-center gap-1">
+                        <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-semibold">3</span>
+                        Build Wishlist
+                      </span>
+                    </div>
+                    <Link href="/projects/new">
+                      <Button className="bg-blue-600 hover:bg-blue-700">
+                        Create Your First Project
+                      </Button>
+                    </Link>
+                  </div>
                 </CardContent>
               </Card>
             ) : (
@@ -196,7 +229,7 @@ export default function DashboardPage() {
                         </Link>
                         <Link href={`/projects/${project.id}/speakers`}>
                           <Button variant="ghost" size="sm">
-                            Speakers
+                            Wishlist
                           </Button>
                         </Link>
                       </div>
@@ -216,48 +249,34 @@ export default function DashboardPage() {
           </div>
 
           {/* Quick Actions */}
-          <div className="grid md:grid-cols-3 gap-6">
-            <Card>
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card className="border-blue-200 bg-blue-50/50">
               <CardHeader>
-                <CardTitle className="text-lg">Find Speakers</CardTitle>
+                <CardTitle className="text-lg text-blue-800">Create Project</CardTitle>
                 <CardDescription>
-                  Browse our database of professional speakers
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Link href="/speakers">
-                  <Button className="w-full">Browse Speakers</Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Create Project</CardTitle>
-                <CardDescription>
-                  Start planning your next speaking event
+                  Start planning your next speaking event and organize everything in one place
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <Link href="/projects/new">
                   <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                    New Project
+                    Create New Project
                   </Button>
                 </Link>
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="border-purple-200 bg-purple-50/50">
               <CardHeader>
-                <CardTitle className="text-lg">Apply as Speaker</CardTitle>
+                <CardTitle className="text-lg text-purple-800">Build Speaker Wishlists</CardTitle>
                 <CardDescription>
-                  Join our network of professional speakers
+                  Browse speakers and add them to your project wishlists for easy management
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Link href="/apply">
-                  <Button variant="outline" className="w-full">
-                    Apply Now
+                <Link href="/speakers">
+                  <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                    Browse Speakers
                   </Button>
                 </Link>
               </CardContent>
